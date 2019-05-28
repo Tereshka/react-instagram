@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ErrorMessage from './ErrorMessage';
+import Loader from './Loader';
 import InstaService from '../services/instaservice';
 
 export default class Palette extends Component {
@@ -7,7 +8,8 @@ export default class Palette extends Component {
 
     state = {
         photos: [],
-        error: false
+        error: false,
+        loading: true,
     }
 
     componentDidMount() {
@@ -21,11 +23,11 @@ export default class Palette extends Component {
     }
 
     onPhotosLoaded = (photos) => {
-        this.setState({photos});
+        this.setState({photos, error: false, loading: false});
     }
 
     onError = (error) => {
-        this.setState({error});
+        this.setState({error, loading: false});
     }
 
     renderItems(arr) {
@@ -42,6 +44,7 @@ export default class Palette extends Component {
 
     render() {
         if (this.state.error) return <ErrorMessage />;
+        if (this.state.loading) return <Loader />;
 
         return (
             <div className="palette">
