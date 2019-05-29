@@ -10,7 +10,7 @@ export default class Posts extends Component{
     state = {
         posts: [],
         error: false,
-        loading: true
+        loading: true,
     }
 
     componentDidMount() {
